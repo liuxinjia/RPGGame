@@ -26,7 +26,7 @@ Steam
 ## Game Summary: 
 It's a Diablo-style RPG with the medieval art. In the middle ages, a young knight who is want to explore the world, and dreaming to become the greatest knight. As our young, brave but also a foolish man will encounter lots of traps and battle with monsters, bad soldiers. You can get experience from the battles or find better weapons to equip. You can also talk and get information and instructions to go to the next level.
 ### Core Player Experience: 
-funny with the dialogue, powerful with combat, stressful with dragons.
+funny with the dialogue, powerful with combat, tense with dragons.
 ### Central Story Theme: 
 The adventure to the greatest knight.
 ### Design Pillar: 
