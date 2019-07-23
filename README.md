@@ -6,8 +6,7 @@
 3rd-person action RPG, single-player, fixed-camera
 
 ### Target Audience:
-13+(T for teen) fans of old school RPG-fans like Diablo and people who like funny things.
-
+13+(T for teen) fans of old school RPG-fans like Diablo and people who like adventures
 ### Controls:
  Mouse and keyboard
 
@@ -28,14 +27,20 @@ Steam
 It's a Diablo-style RPG with the medieval art. In the middle ages, a young knight who is want to explore the world, and dreaming to become the greatest knight. As our young, brave but also a foolish man will encounter lots of traps and battle with monsters, bad soldiers. You can get experience from the battles or find better weapons to equip. You can also talk and get information and instructions to go to the next level.
 ### Core Player Experience: 
 funny with the dialogue, powerful with combat, stressful with dragons.
-Central Story Theme: 
-
+### Central Story Theme: 
+The adventure to the greatest knight.
 ### Design Pillar: 
-
+great combat system, funny and multiple-choice adventure
 ### Remarkability: 
-
+funny
 ### Anticipated Steam Early Access Launch date: 
-
+Fall of 2019
 ### Feature Development Priorities:
+* Real-time combat with tons of different enemies to smash
+* All the required RPG abilities and stats(upgradeable)
+* Level building and game progression
+* Branching dialogue system
+* inventory, loot, usable items
 
 ### Reference Games:
+torchlight 2, [10-best RPG game mixed with puzzle game](https://www.geek.com/games/every-puzzle-game-gets-turned-into-an-rpg-here-are-10-1604452/)
