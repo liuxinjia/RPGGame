@@ -78,7 +78,7 @@ public class EndlessTerrain : MonoBehaviour {
         MeshFilter meshFilter;
 
         LODInfo[] detailLevels;
-        LODMesh[] lODMeshes;
+        LODMesh[] lodMeshes;
 
         MapData mapData;
         bool mapDataReceived;
@@ -100,12 +100,12 @@ public class EndlessTerrain : MonoBehaviour {
             meshObject.transform.parent = parent;
             SetVisible (false);
 
-            lODMeshes = new LODMesh[detailLevels.Length];
+            lodMeshes = new LODMesh[detailLevels.Length];
             for (int i = 0; i < detailLevels.Length; i++) {
-                lODMeshes[i] = new LODMesh (detailLevels[i].lod, UpdateTerrainChunk);
+                lodMeshes[i] = new LODMesh (detailLevels[i].lod, UpdateTerrainChunk);
             }
 
-            mapGenerator.RequestMapData (OnMapDataReceived);
+            mapGenerator.RequestMapData (position, OnMapDataReceived);
         }
 
         void OnMapDataReceived (MapData mapData) {
@@ -120,7 +120,7 @@ public class EndlessTerrain : MonoBehaviour {
 
         public void UpdateTerrainChunk () {
             if (mapDataReceived) {
-        
+
                 float viewerDstFromNearestEdge = bounds.SqrDistance (viewerPosition);
                 bool visible = viewerDstFromNearestEdge <= sqrMaxViewDst;
                 if (visible) {
@@ -135,7 +135,7 @@ public class EndlessTerrain : MonoBehaviour {
                         }
                     }
                     if (lodIndex != previousLODIndex) {
-                        LODMesh lODMesh = lODMeshes[lodIndex];
+                        LODMesh lODMesh = lodMeshes[lodIndex];
                         if (lODMesh.hasMesh) {
                             previousLODIndex = lodIndex;
                             meshFilter.mesh = lODMesh.mesh;
