@@ -21,6 +21,7 @@ public static class Noise {
 		float maxNoiseHeight = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
 
+        //always zoom towards the center
 		float halfWidth = mapWidth / 2f;
 		float halfHeight = mapHeight / 2f;
 
@@ -36,6 +37,8 @@ public static class Noise {
 					float sampleX = (x-halfWidth) / scale * frequency + octaveOffsets[i].x;
 					float sampleY = (y-halfHeight) / scale * frequency + octaveOffsets[i].y;
 
+                    //by default, perlinNoise returns range(0,1)
+                    //change it for decreasing in y axis
 					float perlinValue = Mathf.PerlinNoise (sampleX, sampleY) * 2 - 1;
 					noiseHeight += perlinValue * amplitude;
 
@@ -52,6 +55,7 @@ public static class Noise {
 			}
 		}
 
+        //After increasing, keep the noiseMapValue in Range(0,1)
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
 				noiseMap [x, y] = Mathf.InverseLerp (minNoiseHeight, maxNoiseHeight, noiseMap [x, y]);
