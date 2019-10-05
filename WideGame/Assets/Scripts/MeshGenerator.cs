@@ -10,9 +10,9 @@ public static class MeshGenerator {
 
 		int borderSize = heightMap.GetLength (0);
 		int meshSize = borderSize - 2 * meshSimplificationIncrement;
-		int meshSizeUnSimplify = borderSize - 2;
-		float topLeftX = (meshSizeUnSimplify - 1) / -2f;
-		float topLeftZ = (meshSizeUnSimplify - 1) / 2f;
+		int meshSizeUnSimplified = borderSize - 2;
+		float topLeftX = (meshSizeUnSimplified - 1) / -2f;
+		float topLeftZ = (meshSizeUnSimplified - 1) / 2f;
 
 		int verticesPerLine = (meshSize - 1) / meshSimplificationIncrement + 1;
 
@@ -41,7 +41,7 @@ public static class MeshGenerator {
 				int vertexIndex = vertexIndicesMap[x, y];
 				Vector3 percent = new Vector2 ((x - meshSimplificationIncrement) / (float) meshSize, (y - meshSimplificationIncrement) / (float) meshSize);
 				float height = heightCurve.Evaluate (heightMap[x, y]) * heightMultiplier;
-				Vector3 vertexPosition = new Vector3 (topLeftX + percent.x * meshSizeUnSimplify, height, topLeftZ - percent.y * meshSizeUnSimplify);
+				Vector3 vertexPosition = new Vector3 (topLeftX + percent.x * meshSizeUnSimplified, height, topLeftZ - percent.y * meshSizeUnSimplified);
 
 				meshData.AddVertex (vertexPosition, percent, vertexIndex);
 				if (x < borderSize - 1 && y < borderSize - 1) {
@@ -57,6 +57,8 @@ public static class MeshGenerator {
 			}
 		}
 
+		meshData.BakeNormals ();
+
 		return meshData;
 
 	}
@@ -65,6 +67,7 @@ public static class MeshGenerator {
 public class MeshData {
 	public Vector3[] vertices;
 	int[] triangles;
+	Vector3[] bakeNormals;
 	Vector2[] uvs;
 
 	Vector3[] borderVertices;
@@ -103,6 +106,10 @@ public class MeshData {
 			triangles[triangleIndex + 2] = c;
 			triangleIndex += 3;
 		}
+	}
+
+	public void BakeNormals () {
+		bakeNormals = CalculateNormals ();
 	}
 
 	public Vector3[] CalculateNormals () {
@@ -154,15 +161,16 @@ public class MeshData {
 
 		Vector3 sideAB = pointB - pointA;
 		Vector3 sideAC = pointC - pointA;
+
 		return Vector3.Cross (sideAB, sideAC).normalized;
 	}
-	
+
 	public Mesh CreateMesh () {
 		Mesh mesh = new Mesh ();
 		mesh.vertices = vertices;
 		mesh.triangles = triangles;
 		mesh.uv = uvs;
-		mesh.normals = CalculateNormals ();
+		mesh.normals = bakeNormals;
 		return mesh;
 	}
 
