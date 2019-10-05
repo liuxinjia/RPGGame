@@ -18,4 +18,5 @@ public class MapGeneratorEditor : Editor {
 			mapGen.DrawMapInEditor ();
 		}
 	}
+	
 }
