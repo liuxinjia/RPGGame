@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "NoiseData", menuName = "ProcLand/NoiseData", order = 0)]
+[CreateAssetMenu ()]
 public class NoiseData : UpdatableData {
 
     public Noise.NormalizeMode normalizeMode;
@@ -22,8 +23,8 @@ public class NoiseData : UpdatableData {
         if (octaves < 0) {
             octaves = 0;
         }
-        
-        base.OnValidate();
+
+        base.OnValidate ();
     }
 
 }
