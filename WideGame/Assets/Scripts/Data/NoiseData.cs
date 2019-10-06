@@ -1,33 +1,33 @@
+﻿using UnityEngine;
 using System.Collections;
-using UnityEngine;
 
-[CreateAssetMenu ()]
+[CreateAssetMenu()]
 public class NoiseData : UpdatableData {
 
-    public Noise.NormalizeMode normalizeMode;
+	public Noise.NormalizeMode normalizeMode;
 
-    public float noiseScale;
+	public float noiseScale;
 
-    public int octaves;
-    [Range (0, 1)]
-    public float persistance;
-    public float lacunarity;
+	public int octaves;
+	[Range(0,1)]
+	public float persistance;
+	public float lacunarity;
 
-    public int seed;
-    public Vector2 offset;
+	public int seed;
+	public Vector2 offset;
 
-#if UNITY_EDITOR
-    protected override void OnValidate () {
-        if (lacunarity < 1) {
-            lacunarity = 1;
-        }
-        if (octaves < 0) {
-            octaves = 0;
-        }
+	#if UNITY_EDITOR
 
-        base.OnValidate ();
-    }
+	protected override void OnValidate() {
+		if (lacunarity < 1) {
+			lacunarity = 1;
+		}
+		if (octaves < 0) {
+			octaves = 0;
+		}
 
-    #endif
+		base.OnValidate ();
+	}
+	#endif
 
 }

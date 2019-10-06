@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class HideOnPlay : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameObject.SetActive(false);
-    }
+public class HideOnPlay : MonoBehaviour {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// Use this for initialization
+	void Start () {
+		gameObject.SetActive (false);
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
 }

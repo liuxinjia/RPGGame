@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 644431f1801e0b346a178f4c422dede9, type: 3}
+  m_Script: {fileID: 11500000, guid: c4bed387465ae4ca48177143a455d1a8, type: 3}
   m_Name: Default Terrain
   m_EditorClassIdentifier: 
   autoUpdate: 1
