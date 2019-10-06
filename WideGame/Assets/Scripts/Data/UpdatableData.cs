@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "UpdatableData", menuName = "ProcLand/UpdatableData", order = 0)]
 public class UpdatableData : ScriptableObject {
 
     public event System.Action OnValuesUpdated;
@@ -9,13 +8,15 @@ public class UpdatableData : ScriptableObject {
     //also changed in compile time
     protected virtual void OnValidate () {
         if (autoUpdate) {
-            NotifyOfUpdateValues ();
+            UnityEditor.EditorApplication.update += NotifyOfUpdateValues ;
         }
     }
 
     public void NotifyOfUpdateValues () {
+        UnityEditor.EditorApplication.update -= NotifyOfUpdateValues;
         if (OnValuesUpdated != null) {
             OnValuesUpdated ();
         }
     }
+
 }

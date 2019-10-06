@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 644431f1801e0b346a178f4c422dede9, type: 3}
-  m_Name: NewTerrainData
+  m_Name: Default TerrainData
   m_EditorClassIdentifier: 
   autoUpdate: 1
-  uniformScale: 2.5
-  useFlatShading: 1
-  useFalloff: 1
-  meshHeightMultiplier: 8.65
+  uniformScale: 44.71
+  useFlatShading: 0
+  useFalloff: 0
+  meshHeightMultiplier: 34
   meshHeightCurve:
     serializedVersion: 2
     m_Curve:

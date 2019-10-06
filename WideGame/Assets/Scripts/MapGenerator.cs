@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
 
-	public enum DrawMode { NoiseMap, FalloffMap, Mesh }
+	public enum DrawMode { NoiseMap, Mesh, FalloffMap }
 	public DrawMode drawMode;
 
 	public TerrainData terrainData;
@@ -32,13 +32,12 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void OnTextureValuesUpdated () {
-		if (!Application.isEditor) {
-			textureData.ApplyMaterial (terrainMaterial);
-		}
+		textureData.ApplyToMaterial (terrainMaterial);
 	}
 
 	public int mapChunkSize {
 		get {
+
 			if (terrainData.useFlatShading) {
 				//96 can be divided by any odd number under 12  excluded 10
 				return 95;
@@ -54,10 +53,10 @@ public class MapGenerator : MonoBehaviour {
 		MapDisplay display = FindObjectOfType<MapDisplay> ();
 		if (drawMode == DrawMode.NoiseMap) {
 			display.DrawTexture (TextureGenerator.TextureFromHeightMap (mapData.heightMap));
-		} else if (drawMode == DrawMode.FalloffMap) {
-			display.DrawTexture (TextureGenerator.TextureFromHeightMap (FalloffGenerator.GenerateFalloffMap (mapChunkSize)));
 		} else if (drawMode == DrawMode.Mesh) {
 			display.DrawMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, terrainData.meshHeightMultiplier, terrainData.meshHeightCurve, editorPreviewLOD, terrainData.useFlatShading));
+		} else if (drawMode == DrawMode.FalloffMap) {
+			display.DrawTexture (TextureGenerator.TextureFromHeightMap (FalloffGenerator.GenerateFalloffMap (mapChunkSize)));
 		}
 	}
 
@@ -121,12 +120,16 @@ public class MapGenerator : MonoBehaviour {
 					noiseMap[x, y] = Mathf.Clamp01 (noiseMap[x, y] - falloffMap[x, y]);
 				}
 			}
+
 		}
+
+		textureData.UpdateMeshHeights (terrainMaterial, terrainData.minHeight, terrainData.maxHeight);
 
 		return new MapData (noiseMap);
 	}
 
 	void OnValidate () {
+
 		if (terrainData != null) {
 			terrainData.OnValuesUpdated -= OnValuesUpdated;
 			terrainData.OnValuesUpdated += OnValuesUpdated;
@@ -135,7 +138,7 @@ public class MapGenerator : MonoBehaviour {
 			noiseData.OnValuesUpdated -= OnValuesUpdated;
 			noiseData.OnValuesUpdated += OnValuesUpdated;
 		}
-		if (terrainData != null) {
+		if (textureData != null) {
 			textureData.OnValuesUpdated -= OnTextureValuesUpdated;
 			textureData.OnValuesUpdated += OnTextureValuesUpdated;
 		}
@@ -155,18 +158,10 @@ public class MapGenerator : MonoBehaviour {
 
 }
 
-[System.Serializable]
-public struct TerrainType {
-	public string name;
-	public float height;
-	public Color colour;
-}
-
 public struct MapData {
 	public readonly float[, ] heightMap;
 
 	public MapData (float[, ] heightMap) {
 		this.heightMap = heightMap;
 	}
-
 }
